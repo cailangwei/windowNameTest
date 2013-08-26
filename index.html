@@ -5,23 +5,37 @@
     <title>Access</title>
 </head>
 <body>
+    <h1>Cross origin access by window.name!</h1>
     <script type="text/javascript">
     function loadData(url, callback, proxy) {
         proxy = proxy || (location.protocol + '//' + location.host + '/blank.html');
         var iframe = document.createElement('iframe');
+        iframe.style['position'] = 'absolute';
+        iframe.style['top'] = '0px';
+        iframe.style['left'] = '-9999px';
+        iframe.style['width'] = '1px';
+        iframe.style['height'] = '1px';
         document.body.appendChild(iframe);
         var flag = false;
-        iframe.onload = function() {
+        var onload = function() {
             if (flag) {
                 callback(iframe.contentWindow.name);
+                // remove
             } else {
                 flag = true;
-                iframe.src = proxy;
+                iframe.contentWindow.location = proxy;
             }
         };
+        if (iframe.attachEvent) {
+            // must use attachEvent on IE
+            // or onload event won't fire twice.
+            iframe.attachEvent('onload', onload);
+        } else {
+            iframe.onload = onload;
+        }
         iframe.src = url;
     }
-    loadData('http://localhost:8000/data.html', function(data) {
+    loadData('http://nodejs.in/windowNameTest/data.html', function(data) {
         alert(data);
     });
     </script>
