@@ -3,41 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Access</title>
+    <script type="text/javascript" src="ajax.js"></script>
 </head>
 <body>
     <h1>Cross origin access by window.name!</h1>
     <script type="text/javascript">
-    function loadData(url, callback, proxy) {
-        proxy = proxy || (location.protocol + '//' + location.host + '/blank.html');
-        var iframe = document.createElement('iframe');
-        iframe.style['position'] = 'absolute';
-        iframe.style['top'] = '0px';
-        iframe.style['left'] = '-9999px';
-        iframe.style['width'] = '1px';
-        iframe.style['height'] = '1px';
-        document.body.appendChild(iframe);
-        var flag = false;
-        var onload = function() {
-            if (flag) {
-                callback(iframe.contentWindow.name);
-                // remove
-            } else {
-                flag = true;
-                iframe.contentWindow.location = proxy;
-            }
-        };
-        if (iframe.attachEvent) {
-            // must use attachEvent on IE
-            // or onload event won't fire twice.
-            iframe.attachEvent('onload', onload);
-        } else {
-            iframe.onload = onload;
+    ajax.byWindowName(
+        'http://bs.baidu.com/public03/imageplus/ui.html',
+        {},
+        function(data) {
+            alert(data);
+        },
+        {
+            method: 'GET'
         }
-        iframe.src = url;
-    }
-    loadData('http://bs.baidu.com/public03/imageplus/ui.html', function(data) {
-        alert(data);
-    });
+    );
     </script>
 </body>
 </html>
