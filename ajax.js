@@ -13,7 +13,7 @@ ajax.byWindowName = function (url, data, callback, opt_option) {
             location.protocol + '//' + location.host + '/' + option['proxy'];
     }
 
-    // create form
+    // create iframe
     var iframe = document.createElement('iframe');
     iframe.style.display = 'none';
     document.body.appendChild(iframe);
