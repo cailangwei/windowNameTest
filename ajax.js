@@ -32,9 +32,9 @@ ajax.byWindowName = function (url, data, callback, opt_option) {
         }
 
         formHtml += ''
-            + '<input type="text"'
-            + 'name="' + key + '"'
-            + 'value="' + value.toString() + '"';
+            + '<input type="text" '
+            + 'name="' + key + '" '
+            + 'value="' + value.toString() + '"/>';
     }
     for (var key in data) {
         var value = data[key];
