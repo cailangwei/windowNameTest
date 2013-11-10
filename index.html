@@ -10,7 +10,9 @@
     <script type="text/javascript">
     ajax.byWindowName(
         'http://bs.baidu.com/public03/imageplus/ui.html',
-        {},
+        {
+            'proxy': '/windowNameTest/blank.html'
+        },
         function(data) {
             alert(data);
         },
