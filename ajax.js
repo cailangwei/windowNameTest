@@ -38,7 +38,7 @@ ajax.byWindowName = function (url, data, callback, opt_option) {
     }
     for (var key in data) {
         var value = data[key];
-        if (baidu.lang.isArray(value)) {
+        if (value.length)) {
             key += '[]';
             for (var i = 0, l = value.length; i < l; i++) {
                 appendInput(key, value[i]);
